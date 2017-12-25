@@ -1,8 +1,8 @@
-package kata4.view;
+package view;
 
 import java.awt.Container;
 import java.awt.Dimension;
-import kata4.model.Histogram;
+import model.Histogram;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -22,6 +22,7 @@ public class HistogramDisplay extends ApplicationFrame {
     }
 
     public void execute() {
+        setLocationRelativeTo(null);
         setVisible(true);
     }
 
