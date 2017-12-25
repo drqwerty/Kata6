@@ -1,4 +1,4 @@
-package main;
+package controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -11,7 +11,9 @@ import view.MailListReader;
 public class Kata6 {
 
     private List<Mail> mailList;
-    Histogram<String> histogram;
+    MailHistogramBuilder<Mail> builder;
+    Histogram<String> domains;
+    Histogram<Character> letters;
 
     public static void main(String[] args) throws IOException {
         new Kata6().execute();
@@ -29,11 +31,13 @@ public class Kata6 {
     }
 
     private void process() {
-        histogram = MailHistogramBuilder.build(mailList);
+        builder = new MailHistogramBuilder<>(mailList);
+        domains = builder.build((Mail item) -> item.getMail().split("@")[1]);
+        letters = builder.build((Mail item) -> item.getMail().charAt(0));
     }
 
     private void output() {
-        HistogramDisplay histoDisplay = new HistogramDisplay(histogram);
-        histoDisplay.execute();
+        new HistogramDisplay(domains, "Dominios").execute();
+        new HistogramDisplay(letters, "Primer Caracter").execute();
     }
 }
